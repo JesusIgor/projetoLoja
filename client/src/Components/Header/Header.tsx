@@ -5,11 +5,12 @@ import IconButton from '@mui/material/IconButton';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import PersonIcon from '@mui/icons-material/Person';
 import TextField from '@mui/material/TextField';
+import { useAuthContext } from '../../Context/AuthProvider';
 
 
 const Header: React.FC = () => {
     const navigate = useNavigate();
-
+    const { currentUser } = useAuthContext();
 
 
     return (
@@ -50,6 +51,10 @@ const Header: React.FC = () => {
             </IconButton>
             <IconButton onClick={() => navigate('/login')}>
                 <PersonIcon style={{color:"#003366"}}/>
+            
+            <span style={{marginLeft:"5px", color:"#003366", display:"flex", justifyContent:"center", alignItems:"center", fontSize:"0.5em"}}>
+                {currentUser ? `Olá, ${currentUser.nome}` : 'Login'}
+            </span>
             </IconButton>
             </div>
         </HeaderContainer>
