@@ -2,34 +2,56 @@ import styled from 'styled-components';
 
 export const HeaderContainer = styled.header`
     display: flex;
+    height: 9vh;
+    gap:2em;
     justify-content: space-between;
     align-items: center;
     padding: 20px;
-    background-color: #333;
+    background-color: white; /* Azul */
     color: white;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Sombra mais pronunciada */
+    font-family: 'Roboto', sans-serif; /* Fonte alterada */
 `;
 
 export const Logo = styled.div`
     font-size: 24px;
     font-weight: bold;
+    color: #FFD700; /* Dourado */
 `;
 
-export const SearchBar = styled.input`
-    width: 300px;
-    padding: 10px;
-    border-radius: 5px;
-    border: none;
+export const NavButton = styled.button`
+    background: none;
+    border: none; /* Remove a borda padrão */
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    position: relative;
+    transition: color 0.3s;
+
+    /* Adicionando sombra ao passar o mouse */
+    &:hover {
+        color: #FFD700; /* Dourado */
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5); /* Sombra ao passar o mouse */
+    }
 `;
+
+export const DropdownArrow = styled.span`
+    margin-left: 5px;
+    font-size: 14px; /* Tamanho da setinha */
+`;
+
+
 
 export const LoginButton = styled.button`
-    background-color: #007BFF;
-    color: white;
+    background-color: #FFD700; /* Dourado */
+    color: #003366; /* Azul */
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.3s;
 
     &:hover {
-        background-color: #0056b3;
+        background-color: #ffcc00; /* Um tom mais claro de dourado */
     }
 `;

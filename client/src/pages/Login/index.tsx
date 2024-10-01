@@ -6,7 +6,6 @@ const Login: React.FC = () => {
     const navigate = useNavigate();
 
     const handleLogin = () => {
-        // Lógica de login aqui
         navigate('/home'); // Redireciona para a home após o login
     };
 
