@@ -28,10 +28,9 @@ jobs:
       - name: Build
         run: npm run build
         working-directory: ./client  # Indica o diretório da aplicação
-
       - name: Deploy to Vercel
         uses: amondnet/vercel-action@v20.0.0
         with:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
-          vercel-args: '--prod'  # para implantações de produção
+          vercel-args: '--prod --confirm'  # para implantações de produção
           working-directory: ./client  # Indica o diretório da aplicação
