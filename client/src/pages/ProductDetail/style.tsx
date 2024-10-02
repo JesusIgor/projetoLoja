@@ -51,6 +51,7 @@ export const BuyButton = styled(Button)`
     background-color: #003366; // Cor do botão
     color: white;
     width: 100%;
+    height: 100%;
     margin-top: 10px;
 
     &:hover {
