@@ -6,11 +6,14 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import PersonIcon from '@mui/icons-material/Person';
 import TextField from '@mui/material/TextField';
 import { useAuthContext } from '../../Context/AuthProvider';
-
+import  SearchBar  from '../SearchBar';
+import { Badge } from 'antd'; // Importando o Badge do Ant Design
+import { useCart } from '../../Context/CartContext';
 
 const Header: React.FC = () => {
     const navigate = useNavigate();
     const { currentUser } = useAuthContext();
+    const { cartItems } = useCart(); // Obtendo os itens do carrinho do contexto
 
 
     return (
@@ -23,31 +26,14 @@ const Header: React.FC = () => {
             </Link>
             </div>
             <div style={{ width: "50%", margin: "0 auto" }}>
-                <TextField
-                    variant="outlined"
-                    placeholder="Pesquisar..."
-                    fullWidth
-                    size="small" // Tamanho pequeno para ficar mais discreto
-                    sx={{
-                        backgroundColor: '#fff', // Cor de fundo da barra de pesquisa
-                        borderRadius: '4px',
-                        '& .MuiOutlinedInput-root': {
-                            '& fieldset': {
-                                borderColor: '#ccc', // Cor da borda
-                            },
-                            '&:hover fieldset': {
-                                borderColor: '#007bff', // Cor da borda ao passar o mouse
-                            },
-                            '&.Mui-focused fieldset': {
-                                borderColor: '#007bff', // Cor da borda quando focado
-                            },
-                        },
-                    }}
-                />
+                <SearchBar /> {/* Usando a barra de pesquisa aqui */}
             </div>
             <div style={{width:"20%", display:"flex", justifyContent:"center", gap:"5px"}}>
+                
             <IconButton onClick={() => navigate('/cart')} >
-                <ShoppingCartIcon style={{color:"#003366"}} />
+            <Badge count={cartItems.length} offset={[10, 0]} color="#f50"> {/* Badge mostrando a quantidade */}
+                <ShoppingCartIcon style={{ color: "#003366" }} />
+            </Badge>
             </IconButton>
             <IconButton onClick={() => navigate('/login')}>
                 <PersonIcon style={{color:"#003366"}}/>

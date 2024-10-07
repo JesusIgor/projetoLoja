@@ -21,7 +21,7 @@ const App: React.FC = () => {
         <CartProvider>
 
         <Router>
-        <div style={{height:"100vh", maxHeight: "200vh"}}>
+        <div style={{height:"100%", maxHeight: "400vh", width:"100%", maxWidth: "100vw"}}>
             <Header />
             <ProductMenu/>
             <Routes>
