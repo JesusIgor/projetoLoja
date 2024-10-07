@@ -5,6 +5,7 @@ import { Card, Button } from 'antd';
 // Container principal para a página de detalhes
 export const ProductDetailContainer = styled.div`
     display: flex;
+    height: 100%;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -12,25 +13,30 @@ export const ProductDetailContainer = styled.div`
     background-color: #f4f4f4; // Fundo da página
 `;
 
-// Estilização do Card do Ant Design
 export const StyledCard = styled(Card)`
     width: 50%;
     margin: 20px auto;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
-    border: 1px solid #003366; // Borda do card
+    border: 1px solid #003366;
 
     @media (max-width: 768px) {
-        width: 90%; // Tornar responsivo para telas menores
+        width: 90%;
+    }
+
+    @media (min-width: 1200px) {
+        width: 40%; // Para telas maiores, o card pode ser um pouco menor
     }
 `;
 
 // Estilo da imagem do produto
 export const ProductImage = styled.img`
-    height: 300px;
     width: 100%;
+    height: auto; // Altura ajustada dinamicamente conforme a largura
+    max-width: 100%;
     object-fit: cover;
     border-radius: 10px 10px 0 0;
+    display: block; // Garantir que a imagem ocupe o espaço inteiro
 `;
 
 // Estilo do botão personalizado para o Carrinho

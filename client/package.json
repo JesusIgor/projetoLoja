@@ -16,6 +16,7 @@
     "lottie-react": "^2.4.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-responsive-carousel": "^3.2.23",
     "react-router-dom": "^6.26.2",
     "react-scripts": "5.0.1",
     "styled-components": "^6.1.13",
@@ -24,7 +25,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host",
     "build": "vite build",
     "preview": "vite preview"
   },
@@ -47,6 +48,7 @@
     ]
   },
   "devDependencies": {
+    "@types/lodash": "^4.17.10",
     "@types/node": "^18.19.54",
     "@types/react": "^18.3.10",
     "@types/react-dom": "^18.3.0"

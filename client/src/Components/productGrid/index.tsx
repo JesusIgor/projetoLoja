@@ -1,7 +1,10 @@
 import React from 'react';
 import { Product } from '../../types'; // Importando o tipo do arquivo types.ts
 import { Card, Col, Row } from 'antd';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { useCart } from '../../Context/CartContext';
+import { notification, Button } from 'antd';
+
 
 interface ProductsGridProps {
     data: Product[];
@@ -9,6 +12,22 @@ interface ProductsGridProps {
 }
 
 const ProductsGrid: React.FC<ProductsGridProps> = ({ data, category }) => {
+    const { addToCart } = useCart();
+    const navigate = useNavigate();
+    const openNotification = (data: string) => {
+        notification.success({
+            message: 'Produto adicionado',
+            description: `${data} foi adicionado ao carrinho.`,
+            placement: 'topRight',
+            duration: 3,
+        });
+    };
+
+
+    const handleAddToCart = (product: Product) => {
+        addToCart(product); // Adiciona o produto ao carrinho
+        openNotification(product.name); // Mostra a notificação
+    };
     return (
         <Row gutter={[16, 16]} style={{ height: "100%", backgroundColor: "#f4f4f4" }}>
             {data.map(product => (
@@ -19,15 +38,22 @@ const ProductsGrid: React.FC<ProductsGridProps> = ({ data, category }) => {
                     md={6}  
                     lg={4} 
                 >
-                    <Link to={`/category/${category}/${product.id}`}>
                     <Card
-                            hoverable
-                            cover={<img alt={product.name} src={product.imageUrl} style={{ height: '200px', objectFit: 'cover' }} />} // Definindo uma altura fixa para a imagem
-                            style={{ minHeight: '300px' }} // Definindo uma altura mínima para o Card
-                        >
-                            <Card.Meta title={product.name} description={`R$ ${product.price.toFixed(2)}`} />
-                        </Card>
-                    </Link>
+                        hoverable
+                        cover={
+                                <img 
+                                    alt={product.name} 
+                                    src={product.imageUrl} 
+                                    style={{ height: '200px', objectFit: 'cover' }} 
+                                    onClick={() => navigate(`/category/${category}/${product.id}`)}
+                                />
+                        
+                        } // Definindo uma altura fixa para a imagem
+                        style={{ minHeight: '300px' }} // Definindo uma altura mínima para o Card
+                    >
+                        <Card.Meta title={product.name} description={`R$ ${product.price.toFixed(2)}`} />
+                        <Button onClick={() => handleAddToCart(product)} style={{ marginTop: '1em' }}>Comprar</Button>
+                    </Card>
                 </Col>
             ))}
         </Row>

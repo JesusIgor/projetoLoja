@@ -15,9 +15,8 @@ const ProductDetail: React.FC = () => {
     const { categories } = useProducts();
     const { addToCart } = useCart();
 
-    // Obtendo produtos da categoria específica
-    const products = categories[category] || []; // Verifica se a categoria existe
-    const product = products.find(p => p.id.toString() === id); // Procura o produto na categoria
+    const products = categories[category] || [];
+    const product = products.find(p => p.id.toString() === id);
 
     // Função para mostrar a notificação
     const openNotification = (productName: string) => {
@@ -42,8 +41,9 @@ const ProductDetail: React.FC = () => {
         <ProductDetailContainer>
             <StyledCard
                 title={product.name}
-                cover={<ProductImage alt={product.name} src={product.imageUrl} />}
+                
             >
+                <ProductImage alt={product.name} src={product.imageUrl}/>
                 <p>{product.description}</p>
                 <p style={{ fontWeight: 'bold', color: '#003366' }}>
                     Preço: R$ {product.price.toFixed(2)}
