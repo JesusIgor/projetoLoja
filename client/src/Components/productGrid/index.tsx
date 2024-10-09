@@ -25,8 +25,8 @@ const ProductsGrid: React.FC<ProductsGridProps> = ({ data, category }) => {
 
 
     const handleAddToCart = (product: Product) => {
-        addToCart(product); // Adiciona o produto ao carrinho
-        openNotification(product.name); // Mostra a notificação
+        addToCart(product);
+        openNotification(product.name); 
     };
     return (
         <Row gutter={[16, 16]} style={{ height: "100%", backgroundColor: "#f4f4f4" }}>
@@ -48,8 +48,8 @@ const ProductsGrid: React.FC<ProductsGridProps> = ({ data, category }) => {
                                     onClick={() => navigate(`/category/${category}/${product.id}`)}
                                 />
                         
-                        } // Definindo uma altura fixa para a imagem
-                        style={{ minHeight: '300px' }} // Definindo uma altura mínima para o Card
+                        } 
+                        style={{ minHeight: '300px' }} 
                     >
                         <Card.Meta title={product.name} description={`R$ ${product.price.toFixed(2)}`} />
                         <Button onClick={() => handleAddToCart(product)} style={{ marginTop: '1em' }}>Comprar</Button>

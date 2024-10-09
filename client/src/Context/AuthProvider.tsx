@@ -13,6 +13,7 @@ interface AuthContextType {
     login: (usuario: string, senha: string) => boolean;
     register: (user: User) => void;
     logout: () => void;
+    forgotPassword: (usuario: string, novaSenha: string) => void; // Função de redefinição de senha
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -23,15 +24,15 @@ const initialUsers: User[] = [
 ];
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const [currentUser, setCurrentUser] = useState<User | null>(null);
-    const [users, setUsers] = useState<User[]>(initialUsers); // Estado para armazenar usuários
+    const [users, setUsers] = useState<User[]>(initialUsers);
     
     const login = (usuario: string, senha: string): boolean => {
         const user = users.find(user => user.usuario === usuario && user.senha === senha);
         if (user) {
-            setCurrentUser(user); // Definir o usuário atual
-            return true; // Login bem-sucedido
+            setCurrentUser(user);
+            return true; 
         }
-        return false; // Login falhou
+        return false;
     };
 
     const register = (newUser: User) => {
@@ -42,16 +43,27 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
             return;
         }
 
-        setUsers([...users, newUser]); // Adiciona o novo usuário ao estado
-        setCurrentUser(newUser); // Loga automaticamente após o cadastro
+        setUsers([...users, newUser]);
+        setCurrentUser(newUser);
     };
+    const forgotPassword = (usuario: string, novaSenha: string) => {
+        const userIndex = users.findIndex((user) => user.usuario === usuario);
 
+        if (userIndex !== -1) {
+            const updatedUsers = [...users];
+            updatedUsers[userIndex].senha = novaSenha;
+            setUsers(updatedUsers);
+            message.success('Senha redefinida com sucesso!');
+        } else {
+            message.error('Usuário não encontrado.');
+        }
+    };
     const logout = () => {
         setCurrentUser(null);
     };
 
     return (
-        <AuthContext.Provider value={{ currentUser, login, register, logout }}>
+        <AuthContext.Provider value={{ currentUser, login, register, logout, forgotPassword  }}>
             {children}
         </AuthContext.Provider>
     );

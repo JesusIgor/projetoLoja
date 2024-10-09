@@ -9,7 +9,7 @@ import Cart from './pages/Cart';
 import ProductMenu  from './Components/ProductMenu';
 import OrderCompleted from './pages/OrdeCompleted';
 
-import CategoryPage from './pages/CategoryPage'; // Nova página para categorias
+import CategoryPage from './pages/CategoryPage';
 
 import Header from './Components/Header/Header';
 

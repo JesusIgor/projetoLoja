@@ -4,7 +4,7 @@ import { useProducts } from '../../Context/ProductsContext';
 import ProductsGrid from '../../Components/productGrid';
 
 const CategoryPage: React.FC = () => {
-    const { category = "" } = useParams<{ category: string | undefined }>(); // Extrai o parâmetro da rota
+    const { category = "" } = useParams<{ category: string | undefined }>();
     const { categories } = useProducts(); 
 
     const products = category && category in categories ? categories[category as keyof typeof categories] : [];

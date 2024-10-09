@@ -8,7 +8,6 @@ export interface Product {
     category?: string; 
 }
 
-// Defina o tipo do item do carrinho
 export interface CartItem {
     product: Product;
     quantity: number;

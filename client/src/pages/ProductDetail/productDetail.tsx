@@ -18,7 +18,6 @@ const ProductDetail: React.FC = () => {
     const products = categories[category] || [];
     const product = products.find(p => p.id.toString() === id);
 
-    // Função para mostrar a notificação
     const openNotification = (productName: string) => {
         notification.success({
             message: 'Produto adicionado',
@@ -33,8 +32,8 @@ const ProductDetail: React.FC = () => {
     }
 
     const handleAddToCart = () => {
-        addToCart(product); // Adiciona o produto ao carrinho
-        openNotification(product.name); // Mostra a notificação
+        addToCart(product);
+        openNotification(product.name); 
     };
 
     return (

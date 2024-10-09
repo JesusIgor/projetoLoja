@@ -3,8 +3,8 @@ import { useProducts } from '../../Context/ProductsContext';
 import ProductsGrid from '../../Components/productGrid';
 import { Container } from './style';
 import { Carousel } from 'react-responsive-carousel';
-import 'react-responsive-carousel/lib/styles/carousel.min.css'; // Importa os estilos do carrossel
-import LaunchesSection from '../../Components/Launches'; // Importar o componente
+import 'react-responsive-carousel/lib/styles/carousel.min.css'; 
+import LaunchesSection from '../../Components/Launches'; 
 
 const banners = [
   '/banner2.png',
@@ -12,7 +12,11 @@ const banners = [
   '/banner3.png',
 ];
 
+
 const Home: React.FC = () => {
+
+
+
   return (
     <Container>
       <Carousel

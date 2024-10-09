@@ -3,9 +3,8 @@ import { useCart } from '../../Context/CartContext';
 import { Card, List, Button, notification } from 'antd';
 import styled from 'styled-components';
 import { CloseOutlined } from '@ant-design/icons';
-import { CartItem } from '../../types'; // Certifique-se de ter a definição de CartItem
+import { CartItem } from '../../types'; 
 
-// Estilo para o Container do Carrinho
 const CartContainer = styled(Card)`
     width: 100%;
     margin: 20px auto;
@@ -65,7 +64,6 @@ const Cart: React.FC = () => {
 
     const handleClearCart = () => {
         clearCart();
-        // Função para limpar o carrinho
         notification.success({
             message: 'Carrinho Limpo',
             description: 'Todos os itens foram removidos do carrinho.',
@@ -74,7 +72,7 @@ const Cart: React.FC = () => {
     };
 
     const handleCheckout = () => {
-        window.location.href = '/order-completed'; // Mude esta linha para usar o React Router se necessário
+        window.location.href = '/order-completed'; 
     };
 
     const totalAmount = cartItems.reduce((total:number, item: CartItem) => total + item.product.price * item.quantity, 0);

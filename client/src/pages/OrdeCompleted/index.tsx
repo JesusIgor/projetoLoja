@@ -3,7 +3,6 @@ import { Card, Button } from 'antd';
 import styled from 'styled-components';
 import { CheckCircleOutlined } from '@ant-design/icons';
 
-// Estilo para a página de pedido concluído
 const CompletedContainer = styled(Card)`
     width: 100%;
     height: 100%;
@@ -14,7 +13,6 @@ const CompletedContainer = styled(Card)`
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 `;
 
-// Estilo para o ícone
 const CheckIcon = styled(CheckCircleOutlined)`
     color: #28a745; // Cor verde para o ícone
     font-size: 48px; // Tamanho do ícone
@@ -23,7 +21,7 @@ const CheckIcon = styled(CheckCircleOutlined)`
 
 const OrderCompleted: React.FC = () => {
     const handleContinueShopping = () => {
-        window.location.href = '/'; // Redirecionar para a página inicial
+        window.location.href = '/'; 
     };
 
     return (

@@ -7,10 +7,28 @@ export const HeaderContainer = styled.header`
     justify-content: space-between;
     align-items: center;
     padding: 20px;
-    background-color: white; /* Azul */
+    background-color: white;
     color: white;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Sombra mais pronunciada */
-    font-family: 'Roboto', sans-serif; /* Fonte alterada */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    font-family: 'Roboto', sans-serif;
+    
+    .logo_responsive img {
+        display: none;
+    }
+
+    .logo img {
+        display: flex;
+    }
+
+    @media (max-width: 768px) {
+        .logo img {
+            display: none;
+        }
+        .logo_responsive img {
+            display: flex;
+        }
+    }
+}
 `;
 
 export const Logo = styled.div`
