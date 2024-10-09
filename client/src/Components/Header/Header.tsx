@@ -43,13 +43,14 @@ const Header: React.FC = () => {
         <HeaderContainer>
             <div style={{width:"20%", display:"flex", justifyContent:"center"}}>
             <Link to="/">
-            {width < 700 ? (
+            {width <= 770 ? (
                 <div className="logo_responsive" style={{ width: "100px", height: "100px", justifyContent: "center" }}>
-                    <img style={{ width: "100%" }} src="responsive-logo.png" alt="OnTrack" />
+                    <img 
+                    style={{ width: "100%" }} src="/responsive-logo.png" alt="OnTrack" />
                 </div>
                 ) : (
                 <div className="logo" style={{ width: "150px", height: "150px", justifyContent: "center" }}>
-                    <img style={{ width: "100%" }} src="logo-site.png" alt="OnTrack" />
+                    <img style={{ width: "100%" }} src="/logo-site.png" alt="OnTrack" />
                 </div>
                 )
             }
