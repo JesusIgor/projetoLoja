@@ -1,8 +1,6 @@
-// style.ts
 import styled from 'styled-components';
 import { Card, Button } from 'antd';
 
-// Container principal para a página de detalhes
 export const ProductDetailContainer = styled.div`
     display: flex;
     height: 100%;
@@ -10,7 +8,7 @@ export const ProductDetailContainer = styled.div`
     align-items: center;
     justify-content: center;
     padding: 20px;
-    background-color: #f4f4f4; // Fundo da página
+    background-color: #f4f4f4;
 `;
 
 export const StyledCard = styled(Card)`
@@ -25,21 +23,19 @@ export const StyledCard = styled(Card)`
     }
 
     @media (min-width: 1200px) {
-        width: 40%; // Para telas maiores, o card pode ser um pouco menor
+        width: 40%;
     }
 `;
 
-// Estilo da imagem do produto
 export const ProductImage = styled.img`
     width: 100%;
-    height: auto; // Altura ajustada dinamicamente conforme a largura
+    height: auto; 
     max-width: 100%;
     object-fit: cover;
     border-radius: 10px 10px 0 0;
-    display: block; // Garantir que a imagem ocupe o espaço inteiro
+    display: block; 
 `;
 
-// Estilo do botão personalizado para o Carrinho
 export const CartButton = styled.button`
     background-color: #003366;
     color: white;
@@ -52,9 +48,8 @@ export const CartButton = styled.button`
 
 `;
 
-// Estilo do botão de compra
 export const BuyButton = styled(Button)`
-    background-color: #003366; // Cor do botão
+    background-color: #003366;
     color: white;
     width: 100%;
     height: 100%;

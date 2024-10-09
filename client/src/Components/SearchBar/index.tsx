@@ -1,18 +1,17 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { TextField, List, ListItem, ListItemText } from '@mui/material';
+import { TextField, ListItemText } from '@mui/material';
 import { useProducts } from '../../Context/ProductsContext';
 import { useNavigate } from 'react-router-dom';
 import { Menu } from 'antd';
 
 const SearchBar: React.FC = () => {
-    const { categories } = useProducts(); // Acessa o contexto de produtos
+    const { categories } = useProducts();
     const [searchTerm, setSearchTerm] = useState('');
     const [filteredProducts, setFilteredProducts] = useState<any[]>([]);
     const [menuVisible, setMenuVisible] = useState(false);
     const navigate = useNavigate();
-    const searchRef = useRef<HTMLDivElement>(null); // Referência para o container do search
-
-    // Função para lidar com a busca
+    const searchRef = useRef<HTMLDivElement>(null); 
+    
     useEffect(() => {
         if (searchTerm.trim() === '') {
             setFilteredProducts([]);
@@ -20,26 +19,25 @@ const SearchBar: React.FC = () => {
             return;
         }
 
-        // Concatena todos os produtos das categorias para realizar a busca
         const allProducts = Object.values(categories).flat();
         const results = allProducts.filter(product =>
             product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            product.description.toLowerCase().includes(searchTerm.toLowerCase()) || // Adicionando descrição
-            product.marca.toLowerCase().includes(searchTerm.toLowerCase()) // Adicionando marca
+            product.description.toLowerCase().includes(searchTerm.toLowerCase()) || 
+            product.marca.toLowerCase().includes(searchTerm.toLowerCase())
         );
         setFilteredProducts(results);
-        setMenuVisible(results.length > 0); // Exibe o menu se houver resultados
+        setMenuVisible(results.length > 0);
     }, [searchTerm, categories]);
 
     const handleProductClick = (product: any) => {
         navigate(`/category/${product.category}/${product.id}`);
-        setSearchTerm(''); // Limpa o campo de busca
-        setMenuVisible(false); // Fecha o menu
-    };
+        setSearchTerm(''); 
+        setMenuVisible(false);
+    }
 
     const handleClickOutside = (event: MouseEvent) => {
         if (searchRef.current && !searchRef.current.contains(event.target as Node)) {
-            setMenuVisible(false); // Fecha o menu ao clicar fora
+            setMenuVisible(false);
         }
     };
 
@@ -80,7 +78,7 @@ const SearchBar: React.FC = () => {
                         boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.2)',
                         borderRadius: '4px',
                         border: '1px solid #ccc',
-                        overflow: 'auto',
+                        overflowY: 'auto',
                         maxHeight: '250px',
                     }}
                 >
@@ -88,16 +86,25 @@ const SearchBar: React.FC = () => {
                         <Menu.Item
                             key={product.id}
                             onClick={() => handleProductClick(product)}
-                            style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'flex-start', margin: '10px 0', padding: '10px' }} // Adicionando estilo para cursor
+                            style={{
+                                cursor: 'pointer',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'flex-start',
+                                margin: '10px 0',
+                                padding: '10px',
+                                maxWidth: '100%',
+                            }}
                         >
                             <img
                                 src={product.imageUrl}
                                 alt={product.name}
-                                style={{ width: '40px', height: '40px', marginRight: '10px' }} // Estilo da imagem
+                                style={{ width: '40px', height: '40px', marginRight: '10px' }}
                             />
                             <ListItemText 
                                 primary={product.name} 
                                 secondary={`R$ ${product.price.toFixed(2)}`} 
+                                sx={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }} // Adiciona elipse em nomes longos
                             />
                         </Menu.Item>
                     ))}

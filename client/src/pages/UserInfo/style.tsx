@@ -1,17 +1,25 @@
 import styled from 'styled-components';
-import { Card } from 'antd';
-
-
 
 export const Form = styled.div`
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
 `;
 
 export const Title = styled.h1`
-    font-size: 24px;
+    color: #003366;
     margin-bottom: 20px;
-    text-align: center;
-    color: #003366; // Cor do texto do título
 `;
 
+export const InfoWrapper = styled.div`
+    width: 100%;
+    text-align: left;
+`;
+
+export const InfoField = styled.div`
+    margin: 10px 0;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+`;
