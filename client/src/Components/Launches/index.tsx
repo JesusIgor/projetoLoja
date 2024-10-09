@@ -80,7 +80,7 @@ const LaunchesSection: React.FC = () => {
                     ))}
                 </div>
                 <div style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                    <div style={{ display:"flex", gap:"2em", margin:"1em 0", flexDirection:"row", width:"80%", justifyContent:"center", alignItems:"center"}}>
+                    <div style={{ display:"flex", gap:"1em", margin:"1em 0", flexDirection:"row", width:"80%", justifyContent:"center", alignItems:"center"}}>
                         <div style={{ display: 'flex', gap: "2em", margin: "1em 0", flexDirection: "row", width: '60%', justifyContent: 'center', alignItems: 'center' }}>
                             <Link to={`/category/${launches[5].category}/${launches[5].id}`}>
                                 <LaunchImage
@@ -89,7 +89,7 @@ const LaunchesSection: React.FC = () => {
                                 />
                             </Link>
                         </div>
-                        <div style={{ display: 'flex', gap: "2em", margin: "1em 0", flexDirection: "row", width: '60%', justifyContent: 'center', alignItems: 'center' }}>
+                        <div style={{ display: 'flex', gap: "1em", margin: "1em 0", flexDirection: "row", width: '60%', justifyContent: 'center', alignItems: 'center' }}>
                             <Link to={`/category/${launches[6].category}/${launches[6].id}`}>
                                 <LaunchImage
                                     src={launches[6].imageUrl}
