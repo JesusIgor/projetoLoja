@@ -1,78 +1,81 @@
-// AuthContext.tsx
 import React, { createContext, useContext, useState } from 'react';
 import { message } from 'antd';
+import axios from 'axios';
+
 interface User {
-    nome: string;
-    sobrenome: string;
-    usuario: string;
-    senha: string;
+  id?: number;
+  nome: string;
+  sobrenome: string;
+  usuario: string;
+  senha: string;
 }
 
 interface AuthContextType {
-    currentUser: User | null;
-    login: (usuario: string, senha: string) => boolean;
-    register: (user: User) => void;
-    logout: () => void;
-    forgotPassword: (usuario: string, novaSenha: string) => void; // Função de redefinição de senha
+  currentUser: User | null;
+  login: (usuario: string, senha: string) => void;
+  register: (user: User) => void;
+  logout: () => void;
+  forgotPassword: (usuario: string, novaSenha: string) => void;
 }
 
+const API_URL = 'http://localhost:3000'; 
+
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
-const initialUsers: User[] = [
-    { nome: 'João', sobrenome: 'Silva', usuario: 'joao123', senha: 'senha123' },
-    { nome: 'Maria', sobrenome: 'Souza', usuario: 'maria123', senha: 'senha123' },
-    { nome: 'Pedro', sobrenome: 'Lima', usuario: 'pedro123', senha: 'senha123' },
-];
+
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-    const [currentUser, setCurrentUser] = useState<User | null>(null);
-    const [users, setUsers] = useState<User[]>(initialUsers);
-    
-    const login = (usuario: string, senha: string): boolean => {
-        const user = users.find(user => user.usuario === usuario && user.senha === senha);
-        if (user) {
-            setCurrentUser(user);
-            return true; 
-        }
-        return false;
-    };
+  const [currentUser, setCurrentUser] = useState<User | null>(null);
 
-    const register = (newUser: User) => {
-        const userExists = users.some(user => user.usuario === newUser.usuario || user.senha === newUser.senha);
-        
-        if (userExists) {
-            message.error('Este usuário já existe');
-            return;
-        }
+  const login = async (usuario: string, senha: string): Promise<void> => {
+    try {
+      const response = await axios.post(`${API_URL}/usuarios/login`, { usuario, senha });
+      if (response.status === 200) {
+        setCurrentUser(response.data);
+        message.success('Login realizado com sucesso');
+      }
+    } catch (error) {
+      message.error('Falha ao realizar login. Verifique suas credenciais.');
+    }
+  };
 
-        setUsers([...users, newUser]);
-        setCurrentUser(newUser);
-    };
-    const forgotPassword = (usuario: string, novaSenha: string) => {
-        const userIndex = users.findIndex((user) => user.usuario === usuario);
+  const register = async (newUser: User): Promise<void> => {
+    try {
+      const response = await axios.post(`${API_URL}/usuarios`, newUser);
+      if (response.status === 201) {
+        setCurrentUser(response.data);
+        message.success('Usuário registrado com sucesso!');
+      }
+    } catch (error) {
+      message.error('Erro ao registrar usuário. Tente novamente.');
+    }
+  };
 
-        if (userIndex !== -1) {
-            const updatedUsers = [...users];
-            updatedUsers[userIndex].senha = novaSenha;
-            setUsers(updatedUsers);
-            message.success('Senha redefinida com sucesso!');
-        } else {
-            message.error('Usuário não encontrado.');
-        }
-    };
-    const logout = () => {
-        setCurrentUser(null);
-    };
+  const forgotPassword = async (usuario: string, novaSenha: string): Promise<void> => {
+    try {
+      const response = await axios.put(`${API_URL}/usuarios/${usuario}/senha`, { novaSenha });
+      if (response.status === 200) {
+        message.success('Senha redefinida com sucesso!');
+      }
+    } catch (error) {
+      message.error('Erro ao redefinir a senha.');
+    }
+  };
 
-    return (
-        <AuthContext.Provider value={{ currentUser, login, register, logout, forgotPassword  }}>
-            {children}
-        </AuthContext.Provider>
-    );
+  const logout = (): void => {
+    setCurrentUser(null);
+    message.success('Logout realizado com sucesso');
+  };
+
+  return (
+    <AuthContext.Provider value={{ currentUser, login, register, logout, forgotPassword }}>
+      {children}
+    </AuthContext.Provider>
+  );
 };
 
 export const useAuthContext = () => {
-    const context = useContext(AuthContext);
-    if (!context) {
-        throw new Error("useAuthContext must be used within an AuthProvider");
-    }
-    return context;
+  const context = useContext(AuthContext);
+  if (!context) {
+    throw new Error('useAuthContext must be used within an AuthProvider');
+  }
+  return context;
 };
