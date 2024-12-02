@@ -9,7 +9,7 @@ interface User {
   usuario: string;
   senha: string;
 }
-
+//teste
 interface AuthContextType {
   currentUser: User | null;
   login: (usuario: string, senha: string) => void;
